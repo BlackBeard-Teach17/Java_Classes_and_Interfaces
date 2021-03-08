@@ -3,10 +3,13 @@ package za.co.javatraining;
 public class MathEquation {
     double leftVal;
     double rightVal;
-    public MathEquation()
-    {
+    char opCode;
+    double result;
 
-    }
+    private static int numberOfCalculations;
+    private static double sumOfResults;
+
+    public MathEquation() { }
     public  MathEquation(char opCode)
     {
         this.opCode = opCode;
@@ -41,10 +44,11 @@ public class MathEquation {
         this.opCode = opCode;
     }
 
-    char opCode;
-    double result;
+    public double getResult() {
+        return result;
+    }
 
-    void execute()
+    public void execute()
     {
         switch (opCode) {
             case 'a' -> result = leftVal + rightVal;
@@ -56,5 +60,29 @@ public class MathEquation {
                 result = 0.0d;
             }
         }
+        numberOfCalculations++;
+        sumOfResults += result;
+    }
+    public void execute(double leftVal, double rightVal)
+    {
+        this.leftVal = leftVal;
+        this.rightVal = rightVal;
+
+        execute();
+    }
+
+    public void execute(int leftVal, int rightVal)
+    {
+        this.leftVal = leftVal;
+        this.rightVal = rightVal;
+
+        execute();
+
+        result = (int) result;
+    }
+
+    public static double getAverageResult()
+    {
+        return sumOfResults / numberOfCalculations;
     }
 }
