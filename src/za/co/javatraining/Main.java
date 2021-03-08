@@ -11,6 +11,24 @@ public class Main {
 
         Adder adder = new Adder();
         doCalculation(adder, 30.0d, 70.0d);
+        
+        performMoreCalculations();
+    }
+
+    private static void performMoreCalculations() {
+        CalculateBase[] calculations = {
+                new Divider(100.0d, 50.0d),
+                new Subtractor(100.0d, 20.0d),
+                new Adder(100.0d, 25.0d),
+                new Multiplier(20.0d, 5.0d)
+        };
+        System.out.println();
+        System.out.println("Array calculations");
+        for(CalculateBase calculation : calculations)
+        {
+            calculation.calculate();
+            System.out.println("result = " + calculation.getResult());
+        }
     }
 
     static void doCalculation(CalculateBase calculation, double leftValue, double rightVal)
