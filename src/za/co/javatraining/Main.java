@@ -16,7 +16,17 @@ public class Main {
         doCalculation(adder, 30.0d, 70.0d);
         
        // performMoreCalculations();
-        executeInteractively();
+        //executeInteractively();
+        dynamicInteractivity();
+    }
+
+    private static void dynamicInteractivity() {
+        DynamicHelper helper = new DynamicHelper(new MathProcessing[]{
+                new Adder()
+        });
+        System.out.println("Enter an operation and two numbers: ");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
     }
 
     private static CalculateBase createCalculation(MathOperation operation, double leftVal, double rightVal)
