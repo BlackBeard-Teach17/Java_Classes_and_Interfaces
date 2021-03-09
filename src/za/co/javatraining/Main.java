@@ -1,4 +1,7 @@
 package za.co.javatraining;
+import java.util.Locale;
+import java.util.Scanner;
+
 import static za.co.javatraining.MathEquation.getAverageResult;
 
 public class Main {
@@ -12,7 +15,41 @@ public class Main {
         Adder adder = new Adder();
         doCalculation(adder, 30.0d, 70.0d);
         
-        performMoreCalculations();
+       // performMoreCalculations();
+        executeInteractively();
+    }
+
+    private static CalculateBase createCalculation(MathOperation operation, double leftVal, double rightVal)
+    {
+        CalculateBase calculation = null;
+        switch (operation)
+        {
+            case ADD -> calculation = new Adder(leftVal, rightVal);
+            case SUBTRACT -> calculation = new Subtractor(leftVal, rightVal);
+            case MULTIPLY -> calculation = new Multiplier(leftVal, rightVal);
+            case DIVIDE -> calculation = new Divider(leftVal, rightVal);
+            default -> System.out.println("Oops");
+        }
+        return calculation;
+    }
+
+    static void executeInteractively()
+    {
+        System.out.println("Enter an operation and two numbers: ");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        String[] parts = userInput.split(" ");
+        performOperation(parts);
+    }
+
+    private static void performOperation(String[] parts) {
+        MathOperation operation = MathOperation.valueOf(parts[0].toUpperCase());
+        double leftVal = Double.parseDouble(parts[1]);
+        double rightVal = Double.parseDouble(parts[2]);
+        CalculateBase calculation = createCalculation(operation, leftVal, rightVal);
+        calculation.calculate();
+        System.out.println("Operation performed: " + operation);
+        System.out.println(calculation.getResult());
     }
 
     private static void performMoreCalculations() {
